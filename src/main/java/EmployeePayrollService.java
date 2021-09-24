@@ -12,8 +12,11 @@ public class EmployeePayrollService {
     //Main Driver Class
     public static void main(String[] args) {
         ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
+        //Created an Object
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
+        //Scanner to take input from User
         Scanner consoleInputReader = new Scanner(System.in);
+        //Calling Method Read and Write
         employeePayrollService.readEmployeePayrollData(consoleInputReader);
         employeePayrollService.writeEmployeePayrollData();
     }
