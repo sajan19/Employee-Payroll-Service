@@ -1,8 +1,29 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EmployeePayrollService {
+public class EmployeePayrollService  {
+    public static String PAYROLL_FILE_NAME = "payroll-file.txt";
+    public void printData(IOService ioService) {
+        try{
+            Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public long countEntries(IOService fileIo) {
+        try{
+            Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public enum IOService {CONSOLE_IO, FILE_IO, DB_IO, REST_IO}
     //List to store Employee Details
     private List<EmployeePayrollData> employeePayrollList;
     //Constructor of List
@@ -18,14 +39,15 @@ public class EmployeePayrollService {
         Scanner consoleInputReader = new Scanner(System.in);
         //Calling Method Read and Write
         employeePayrollService.readEmployeePayrollData(consoleInputReader);
-        employeePayrollService.writeEmployeePayrollData();
+        employeePayrollService.writeEmployeePayrollData(IOService.FILE_IO);
     }
     //Method to Write Employee Details
-    private void writeEmployeePayrollData() {
+    public void writeEmployeePayrollData(IOService fileIo) {
         System.out.println("\nWriting Employee Payroll Roaster to Console\n" + employeePayrollList);
     }
+
     //Method to read Employee Details
-    private void readEmployeePayrollData(Scanner consoleInputReader) {
+    public void readEmployeePayrollData(Scanner consoleInputReader) {
         System.out.println("Enter Employee ID: ");
         int id = consoleInputReader.nextInt();
         System.out.println("Enter Employee Name: ");
@@ -34,4 +56,10 @@ public class EmployeePayrollService {
         double salary = consoleInputReader.nextDouble();
         employeePayrollList.add(new EmployeePayrollData(id, name, salary));
     }
+    //Method to print Data
+    public void printData(IOService ioService){
+        if(ioService.equals(IOService.FILE_IO))
+            new EmployeePayrollService.IOService()
+    }
+
 }
