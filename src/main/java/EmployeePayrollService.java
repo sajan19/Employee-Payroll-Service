@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 // To implement Employee Payroll Service System
-
 public class EmployeePayrollService {
     public List<EmployeePayrollData> employeePayrollList;
 
@@ -25,7 +24,7 @@ public class EmployeePayrollService {
         employeePayrollService.writeEmployeePayrollData(IOService.FILE_IO);
     }
 
-// This method is implementing Welcome Message
+    // This method is implementing Welcome Message
     public void printWelcomeMessage() {
         System.out.println("Welcome To The Employee Payroll Service System");
     }
@@ -42,7 +41,7 @@ public class EmployeePayrollService {
         employeePayrollList.add(new EmployeePayrollData(id, name, salary));
     }
 
-//     Method to write the Employee Payroll to the console
+    //     Method to write the Employee Payroll to the console
     public void writeEmployeePayrollData(IOService ioService) {
         if (ioService.equals(IOService.CONSOLE_IO))
             System.out.println("\nWriting Employee Payroll Roaster to console\n" + employeePayrollList);
@@ -50,6 +49,7 @@ public class EmployeePayrollService {
             new EmployeePayrollFileIOService().writeData(employeePayrollList);
         }
     }
+
     //Method to Count Number of Entries
     public long countEntries(IOService ioService) {
         if (ioService.equals(IOService.FILE_IO))
@@ -57,9 +57,16 @@ public class EmployeePayrollService {
         return 0;
     }
 
-//  Method to print the lines in the file
+    //  Method to print the lines in the file
     public void printData(IOService ioService) {
         if (ioService.equals(IOService.FILE_IO))
             new EmployeePayrollFileIOService().printData();
+    }
+
+    //    Method to read each line of EmployeePayrollData
+    public long readEmployeePayrollData(IOService ioService) {
+        if (ioService.equals(IOService.FILE_IO))
+            this.employeePayrollList = new EmployeePayrollFileIOService().readData();
+        return employeePayrollList.size();
     }
 }
